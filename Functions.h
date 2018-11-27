@@ -100,14 +100,14 @@ void printSphereToVector(double r, double theta, double azimuth, vector &offsets
 }
 void printVectorDifference(vector &offsets, vector &signal)
 {
-  double xtemp = -1 * (signal.x - offsets.x);
-  double ytemp = (signal.y);
-  double ztemp = -1 * (signal.z - offsets.z);
+  double xtemp = signal.x; //-1 * (signal.x - offsets.x);
+  double ytemp = signal.y;
+  double ztemp = signal.z; //-1 * (signal.z + offsets.z);
   Serial.print(xtemp, 5);
   Serial.print(", ");
-  Serial.print(ztemp, 5);
-  Serial.print(", ");
   Serial.print(ytemp, 5);
+  Serial.print(", ");
+  Serial.print(ztemp, 5);
 }
 void lsrl(double x[], double y[], int dim, double values[])
 {
