@@ -20,12 +20,12 @@ double offset = 1.101;//the intercept from the least squares regression analysis
 double slope = 0.0342 / 2.0;//the slope from the least squares regression analysis, divided by 2.0 because the duration is to the object and back but distance to the object would only be time to get there or back.
 
 //room scan variables
-int pstart = 60;
-int pend = 120;
-int ystart = 60;
-int yend = 120;
-int pstep = 5;
-int ystep = 5;
+int pstart = 84;
+int pend = 96;
+int ystart = 84;
+int yend = 96;
+int pstep = 2;
+int ystep = 2;
 //scanner variables(Scanner setup geometry)
 //{pitch_x, pitch_y, pitch_z, yaw_x, yaw_y, yaw_z, x, y, z}
 servoGeometry geo1 = { -0.48, 0.52, 6.63, 0.48, 0.0, 7.87, 0.0, 0.0, 6.83};
@@ -175,6 +175,15 @@ void setup() {
   }
   for (int iter = 0; iter < 20; iter++)
   {
+    servo.setServoPosition(0, map(90, 0, 180, 0x18, 0xE8));
+    servo.setServoPosition(1, map(90, 0, 180, 0x18, 0xE8));
+    servo.communicate();//initiate servo communication
+
+    delay(15);
+  }
+  delay(5000);
+  for (int iter = 0; iter < 20; iter++)
+  {
     servo.setServoPosition(0, map(ystart, 0, 180, 0x18, 0xE8));
     servo.setServoPosition(1, map(pstart, 0, 180, 0x18, 0xE8));
     servo.communicate();//initiate servo communication
@@ -191,7 +200,7 @@ void loop() {
   Serial.print("[");
   for (int pitch = pstart; pitch < pend; pitch += pstep)
   {
-    double theta = pitch * DEG_TO_RAD;
+    double theta = (pitch-3) * DEG_TO_RAD;
     servo.setServoPosition(1, map(pitch, 180, 0, 0x18, 0xE8));
 
     servo.communicate();//initiate servo communication
