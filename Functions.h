@@ -51,7 +51,7 @@ void calculateOffset(ServoGeometry &geo, double theta, double azimuth, vector &o
 
   //https://stackoverflow.com/questions/14607640/rotating-a-vector-in-3d-space
   //calculate the new vector of m1 after rotating to the given theta
-  //uses a rotaion matrix rotating about the x-axis
+  //uses a rotation matrix rotating about the x-axis
   double tempx = geo.pitch_x;
   double tempy = geo.pitch_y * cos(theta) - geo.pitch_z * sin(theta);
   double tempz = geo.pitch_y * sin(theta) + geo.pitch_z * cos(theta);
@@ -60,7 +60,7 @@ void calculateOffset(ServoGeometry &geo, double theta, double azimuth, vector &o
   tempy += geo.yaw_y;
   tempz += geo.yaw_z;
   //calculate the new vector of m2 after rotating to the given azimuth
-  //uses a rotaion matrix rotating about the z-axis
+  //uses a rotation matrix rotating about the z-axis
   double temp = tempx * cos(azimuth) - tempy * sin(azimuth);
   double temp2 = tempx * sin(azimuth) - tempy * cos(azimuth);
   tempx = temp;
